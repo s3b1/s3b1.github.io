@@ -1,1 +1,140 @@
-Hello world
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <style>
+html, body {
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.25em;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0.5%;
+}
+
+body, #input {
+  background: #171e1d;
+  font-family: monospace;
+}
+
+/* Input */
+.input-wrapper {
+  display: flex;
+}
+
+#input, .input-wrapper {
+  color: #ff8300;
+}
+
+#input {
+  flex: 2;
+  border: none;
+}
+
+#input:focus {
+  outline: none;
+}
+
+/* Output */
+#output-wrapper div {
+  display: inline-block;
+  width: 100%;
+}
+
+.header-output {
+  color: #9d9d9d82;
+}
+
+.error-output {
+  color: #ff4e4e;
+}
+  </style>
+</head>
+<body>
+<div id="output-wrapper"></div>
+<div class="input-wrapper">
+    <span>$&nbsp;</span>
+    <input id="input" type="text" value=""/>
+</div>
+</body>
+<script>
+var tab = {1:"unknown command", 2:"sebastien", 3:"help section", 4:"bike section",5:"how I cook pancakes", 6:"close the window",7:"my own terminal for fun"};
+var map = {17: false, 76: false, 13: false};
+var unix = ["whoami", "help", "bike", "fun", "kill","version"];
+
+document.getElementById("input").focus();
+
+document.getElementById("input").addEventListener("keydown", function (e) {
+  if (e.keyCode in map){
+    map[e.keyCode] = true;
+  }
+});
+document.getElementById("input").addEventListener("keyup", function (e) {
+  if (map[13]) {
+    var input = document.getElementById("input");
+    var output = document.getElementById("output-wrapper");
+    validate(e.srcElement.value);
+  } else if (map[17] && map[76]) {
+    location.reload();
+  }
+  if (e.keyCode in map){
+    map[e.keyCode] = false;
+  }
+});
+
+function validate(e) {
+  console.log(e);
+  //<div class="header-output">$ ls</div>
+  // make header
+  var outputWrapper = document.getElementById("output-wrapper");
+  var headerOutput = document.createElement("div");
+  outputWrapper.appendChild(headerOutput);
+  headerOutput.setAttribute("class", "header-output");
+  headerOutput.innerHTML="$&nbsp;" + e;
+
+  //if (parseInt(e) && e<4) {
+  var search = unix.indexOf(e);
+  if (search > -1) {
+    //output.value = tab[e];
+    //<div class="text-output"></div>
+    var textOutput = document.createElement("div");
+    outputWrapper.appendChild(textOutput);
+    textOutput.setAttribute("class", "text-output");
+    textOutput.innerHTML=tab[search + 2];
+  }else{
+    //output.value = tab[4];
+    //<div class="error-output">emulator: Command not found</div>
+    var errorOutput = document.createElement("div");
+    outputWrapper.appendChild(errorOutput);
+    errorOutput.setAttribute("class", "error-output");
+    errorOutput.innerHTML=tab[1];
+  }
+  makeline();
+  return false;
+}
+
+function makeline() {
+  input.value="";
+  input.focus();
+  input.addEventListener("keydown", function (e) {
+    if (e.keyCode in map){
+      map[e.keyCode] = true;
+    }
+  });
+  input.addEventListener("keyup", function (e) {
+    if (map[13]) {
+      validate(e.srcElement.value);
+    } else if (map[17] && map[76]) {
+      location.reload();
+    }
+    if (e.keyCode in map){
+      map[e.keyCode] = false;
+    }
+  });
+}
+</script>
+</html>

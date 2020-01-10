@@ -42,7 +42,11 @@ function listenKeys(a, b) {
       location.reload();
     } else if (map[17] && map[88]){
       if(confirm("Are you sure you want to close this window?")) {
-        window.close();
+        try {
+          window.close();
+        } catch (error) {
+          alert(error);
+        }
       }
     }
     // once the action is triggered, keys in map are set back to false

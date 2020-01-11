@@ -1,5 +1,5 @@
 // user's entries
-var unix = ["whoami", "help", "bike", "fun", "kill", "version", "clear"];
+var unix = ["whoami", "help", "bike", "fun", "version", "clear"];
 // array of function pointers
 var tab = {
   1: "Unknown command. Type 'help' for more information",
@@ -7,9 +7,8 @@ var tab = {
   3: "This the help section. The terminal accepts following commands: " + printCommands(),
   4: bike(),
   5: pancakes(),
-  6: "Press CTRL + X to close the window",
-  7: "My own terminal for fun. Feel free to reuse :)",
-  8: "Press CTRL + L to clear the terminal",
+  6: "My own terminal for fun. Feel free to reuse :)",
+  7: "Press CTRL + L to clear the terminal",
 };
 // keyboards detection
 var map = {17: false, 76: false, 13: false, 88: false};
@@ -40,14 +39,6 @@ function listenKeys(a, b) {
     } else if (map[17] && map[76]) {
       // reset the terminal
       location.reload();
-    } else if (map[17] && map[88]){
-      if(confirm("Are you sure you want to close this window?")) {
-        try {
-          window.close();
-        } catch (error) {
-          alert(error);
-        }
-      }
     }
     // once the action is triggered, keys in map are set back to false
     if (e.keyCode in map){

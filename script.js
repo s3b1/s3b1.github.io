@@ -100,7 +100,13 @@ function printCommands() {
 
 // custom functions
 function bike() {
-  return "Bike section in progress";
+  var ascii = [45, 95, 111, 92, 32, 60, 47, 44, 40, 41, 13];
+  // // 45=- 95=_  111=o 92=\  32=monospace  60=<  47=/  44=comma  40=(  41=)  13=Carriage Return
+  // //   ------__o
+  // //  ----_\ <,_
+  // // ----(_)/ (_)
+  var bike = String.fromCharCode(ascii[4], ascii[4], ascii[0], ascii[0], ascii[0], ascii[0], ascii[0], ascii[0], ascii[1],  ascii[1], ascii[2], ascii[10], ascii[4], ascii[0], ascii[0], ascii[0], ascii[0], ascii[1], ascii[3], ascii[4], ascii[5], ascii[7], ascii[1], ascii[10], ascii[0], ascii[0], ascii[0], ascii[0], ascii[0], ascii[8], ascii[1], ascii[9], ascii[6], ascii[4], ascii[8], ascii[1], ascii[9]);
+  return "<pre>" + bike + "</pre>";
 }
 
 function pancakes() {
